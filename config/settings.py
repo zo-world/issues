@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
-    'pages'
+    'pages',
+    'issues',
+    'crispy_bootstrap5',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +134,6 @@ LOGIN_REDIRECT_URL = 'home'
 EMAIL_BACKEND = (
 "django.core.mail.backends.console.EmailBackend"
 )
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"

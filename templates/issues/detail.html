@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block title %}{{ issue.title }}{% endblock title %}
+
+
+{% block content %}
+<div class="container">
+  <h1>{{ issue.title }}</h1>
+  <h3>{{ issue.subtitle }}</h3>
+  <h6>By: {{ issue.author}} | On: {{ issue.created_on }}</h6>
+  <p>{{ issue.body }}</p>
+  {% if user.is_authenticated %}
+  {% if post.author.username == user.username %}
+  <p>
+    <a href="{% url 'edit' post.id}">Update</a>
+    <a href="{% url 'delete' post.id}">Delete</a>
+  </p>
+  {% endif %}
+  {% endif %}
+</div>
+{% endblock content %}

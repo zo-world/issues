@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Issues{% endblock title %}
+
+{% block content %}
+<div class="d-flex justify-content-center">
+  <h1>Issues</h1>
+</div>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for issue in issue_list %}
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ issue.title|truncatechars:45 }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ issue.subtitle }}</h6>
+        <p class="card-text">{{ issue.body|truncatechars:200}}</p>
+        <button type="button" class="btn btn-outline-info">
+          <a href="{% url 'detail' issue.id %}" class="card-link">Details</a>
+        </button>
+        {% if user.is_authenticated %}
+        {% if issue.assignee.username == user.username %}
+        <button type="button" class="btn btn-outline-warning">
+          <a href="{% url 'edit' issue.id %}"><i class="bi bi-pencil-square">Edit</i></a>
+        </button>
+        <button type="button" class="btn btn-outline-danger">
+          <a href="{% url 'delete' issue.id %}"><i class="bi bi-trash"></i>Delete</a>
+        </button>
+        {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}
